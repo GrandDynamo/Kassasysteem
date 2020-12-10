@@ -15,7 +15,7 @@ namespace KassaSysteem
 
         public void RemoveItem(Product product)
         {
-            productsInStock.Remove(1, product);
+            productsInStock.Remove(1, out product);
         }
     }
 }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace KassaSysteem
 {
-    class Product
+    public class Product
     {
         private int productId;
         private string productName;

@@ -33,7 +33,7 @@ namespace KassaSysteem
         {
             foreach(Product item in productTypes)
             {
-                Console.WriteLine(item.GetNameProduct);
+                Console.WriteLine(item.GetProductName());
             }
         }
     }
