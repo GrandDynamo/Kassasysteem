@@ -4,6 +4,9 @@ using System.Text;
 
 namespace KassaSysteem
 {
+    /// <summary>
+    /// Represents a payment method.
+    /// </summary>
     public enum PaymentMethod
     {
         MasterCard,

@@ -4,6 +4,9 @@ using System.Text;
 
 namespace KassaSysteem
 {
+    /// <summary>
+    /// Represents a Product.
+    /// </summary>
     public class Product
     {
         private int productId;
@@ -11,6 +14,13 @@ namespace KassaSysteem
         private double price;
         private double sale;
 
+        /// <summary>
+        /// Constructs a new Product.
+        /// </summary>
+        /// <param name="productId">Id for this product.</param>
+        /// <param name="productName">Name for this product.</param>
+        /// <param name="price">Price for this product.</param>
+        /// <param name="sale">Sale over this product.</param>
         public Product(int productId, string productName, double price, double sale)
         {
             this.productId = productId;
