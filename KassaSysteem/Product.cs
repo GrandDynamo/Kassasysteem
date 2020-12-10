@@ -43,7 +43,7 @@ namespace KassaSysteem
         /// <returns></returns>
         public string GetProductName()
         {
-            return productName;
+            return this.productName;
         }
 
         /// <summary>
