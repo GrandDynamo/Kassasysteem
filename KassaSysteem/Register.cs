@@ -22,12 +22,12 @@ namespace KassaSysteem
         /// Creates a new Register.
         /// </summary>
         /// <param name="startamount">amount of cash to start with.</param>
-        public Register(double startamount)
+        public Register(double startamount, Stock stock)
         {
             this.allowedCards = new List<PaymentMethod>();
             this.sales = new List<Sale>();
             this.receipts = new List<Receipt>();
-            this.stock = new Stock();
+            this.stock = stock;
             this.startAmountRegister = startamount;
             this.moneyAmountRegister = startamount;
             this.currentReceipt = new Receipt();

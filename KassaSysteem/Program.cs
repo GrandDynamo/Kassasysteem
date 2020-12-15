@@ -6,13 +6,15 @@ namespace KassaSysteem
     class Program
     {
         static Register register;
+        static bool quit = false;
 
         static void Main(string[] args)
         {
             Console.WriteLine($"Register system.");
 
+            var stock = new Stock();
             // Entry into program.
-            register = new Register(500);
+            register = new Register(500, stock);
 
             // TODO create test register
             var milk = new Product(0, "LekkerMelk", 5.0, 0.0);
@@ -25,7 +27,6 @@ namespace KassaSysteem
             var tacospices = new Product(7, "Taco kruiden", 1.0, 0.0);
             var creamcheese = new Product(8, "Roomkaas", 5.0, 0.0);
 
-            var stock = new Stock();
             stock.AddItem(milk);
             stock.AddItem(eggs);
             stock.AddItem(meatballs);
@@ -35,7 +36,42 @@ namespace KassaSysteem
             stock.AddItem(tacobeef);
             stock.AddItem(tacospices);
             stock.AddItem(creamcheese);
-            register.stock = stock;
+
+            while (!quit)
+            {
+                Console.Write("#: ");
+                var cmd = Console.ReadLine();
+
+                if (cmd.StartsWith("scan "))
+                {
+                    if (int.TryParse(cmd.Substring(5), out int id))
+                    {
+                        // scan
+                        Console.WriteLine($"Scanned {id}.");
+                    }
+                    else
+                    {
+                        Console.WriteLine("invalid id");
+                    }
+                }
+                else
+                {
+                    switch (cmd)
+                    {
+                        default:
+                            Console.WriteLine("Unknown action.");
+                            break;
+
+                        case "q":
+                        case "quit":
+                        case "exit":
+                        case "stop":
+                            quit = true;
+                            Console.WriteLine("Shutting down...");
+                            break;
+                    }
+                }
+            }
         }
     }
 }
