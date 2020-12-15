@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,10 +10,7 @@ namespace KassaSysteem
     /// </summary>
     public class Receipt
     {
-        [JsonProperty]
         private Dictionary<Product, int> productOnReceipt = new Dictionary<Product, int>();
-
-        [JsonProperty]
         private PaymentMethod usedPaymentMethod = PaymentMethod.Cash;
 
         /// <summary>

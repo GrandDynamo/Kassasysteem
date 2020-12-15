@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -10,16 +9,9 @@ namespace KassaSysteem
     /// </summary>
     public class Product
     {
-        [JsonProperty]
         private int productId;
-
-        [JsonProperty]
         private string productName;
-
-        [JsonProperty]
         private double price;
-
-        [JsonProperty]
         private double sale;
 
         /// <summary>
@@ -36,7 +28,7 @@ namespace KassaSysteem
             this.price = price;
             this.sale = sale;
         }
-            
+
         /// <summary>
         /// Retrieves id of the product.
         /// </summary>

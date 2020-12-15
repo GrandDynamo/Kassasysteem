@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -10,10 +9,7 @@ namespace KassaSysteem
     /// </summary>
     public class Sale
     {
-        [JsonProperty]
         List<Product> productTypes = new List<Product>();
-
-        [JsonProperty]
         private double PriceSale;
 
         public Sale(double PriceSale)
