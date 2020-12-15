@@ -42,34 +42,34 @@ namespace KassaSysteem
                 Console.Write("#: ");
                 var cmd = Console.ReadLine();
 
-                if (cmd.StartsWith("scan "))
+                switch (cmd)
                 {
-                    if (int.TryParse(cmd.Substring(5), out int id))
-                    {
-                        // scan
-                        Console.WriteLine($"Scanned {id}.");
-                    }
-                    else
-                    {
-                        Console.WriteLine("invalid id");
-                    }
-                }
-                else
-                {
-                    switch (cmd)
-                    {
-                        default:
-                            Console.WriteLine("Unknown action.");
-                            break;
+                    case "q":
+                    case "quit":
+                    case "exit":
+                    case "stop":
+                        quit = true;
+                        Console.WriteLine("Shutting down...");
+                        break;
 
-                        case "q":
-                        case "quit":
-                        case "exit":
-                        case "stop":
-                            quit = true;
-                            Console.WriteLine("Shutting down...");
-                            break;
-                    }
+                    default:
+                        if (cmd.StartsWith("scan "))
+                        {
+                            if (int.TryParse(cmd.Substring(5), out int id))
+                            {
+                                // scan
+                                Console.WriteLine($"Scanned {id}.");
+                            }
+                            else
+                            {
+                                Console.WriteLine("invalid id");
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("Unknown action.");
+                        }
+                        break;
                 }
             }
         }
