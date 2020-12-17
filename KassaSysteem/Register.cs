@@ -64,13 +64,16 @@ namespace KassaSysteem
         /// </summary>
         /// <param name="method">Method to pay with.</param>
         /// <param name="amount">Amount of money paid.</param>
-        public bool Pay(PaymentMethod method, double amount)
+        public bool Pay(PaymentMethod method, double amount, out double change)
         {
+            change = amount;
             if (!this.allowedCards.Contains(method) || amount < this.GetSubTotal())
                 return false;
 
+            change = amount - this.GetSubTotal();
+
             this.currentReceipt.SetPaymentMethod(method);
-            this.PrintReceipt();
+            this.PrintReceipt(change);
             this.receipts.Add(this.currentReceipt);
 
             this.currentReceipt = new Receipt();
@@ -89,7 +92,7 @@ namespace KassaSysteem
         /// <summary>
         /// Prints a receipt.
         /// </summary>
-        public void PrintReceipt()
+        public void PrintReceipt(double change)
         {
             // TODO print receipt from this.currentReceipt;
             Console.WriteLine($" -------------------------------------");
@@ -102,8 +105,9 @@ namespace KassaSysteem
                     Console.WriteLine($"{product}{keyvalue.Key.GetPrice().ToString("c", new NumberFormatInfo() { CurrencySymbol = "EUR " })}");
                 }
             }
-            Console.WriteLine($"\n\nTotal: {currentReceipt.GetPriceTotal()}");
+            Console.WriteLine($"\n\nTotal: {currentReceipt.GetPriceTotal().ToString("c", new NumberFormatInfo() { CurrencySymbol = "EUR " })}");
             Console.WriteLine($"Payment method: {Enum.GetName(typeof(PaymentMethod), currentReceipt.GetPaymentMethod())}");
+            Console.WriteLine($"Change: {change.ToString("c", new NumberFormatInfo() { CurrencySymbol = "EUR " })}");
             Console.WriteLine($" -------------------------------------");
         }
 
