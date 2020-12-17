@@ -52,6 +52,10 @@ namespace KassaSysteem
         public double GetPriceTotal()
         {
             double PriceFromDictionary = 0.0;
+            foreach(var p in productOnReceipt)
+            {
+                PriceFromDictionary += p.Key.GetPrice() * p.Value;
+            }
             return PriceFromDictionary;
         }
 

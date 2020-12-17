@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Text;
 
@@ -31,6 +32,12 @@ namespace KassaSysteem
             this.startAmountRegister = startamount;
             this.moneyAmountRegister = startamount;
             this.currentReceipt = new Receipt();
+        }
+
+        public void AddAllowedCard(PaymentMethod method)
+        {
+            if(!this.allowedCards.Contains(method))
+                this.allowedCards.Add(method);
         }
 
         /// <summary>
@@ -86,18 +93,19 @@ namespace KassaSysteem
         public void PrintReceipt()
         {
             // TODO print receipt from this.currentReceipt;
-            Console.WriteLine($" ----------------------");
+            Console.WriteLine($" -------------------------------------");
             Console.WriteLine($"Date: {DateTime.Now}\n");
             foreach(var keyvalue in currentReceipt.GetProducts())
             {
                 for(int i = 0; i < keyvalue.Value; i++)
                 {
-                    Console.WriteLine($"{keyvalue.Key.GetProductName()}: {keyvalue.Key.GetPrice()}");
+                    string product = $"{keyvalue.Key.GetProductName()}:".PadRight(25);
+                    Console.WriteLine($"{product}{keyvalue.Key.GetPrice().ToString("c", new NumberFormatInfo() { CurrencySymbol = "EUR " })}");
                 }
             }
             Console.WriteLine($"\n\nTotal: {currentReceipt.GetPriceTotal()}");
             Console.WriteLine($"Payment method: {Enum.GetName(typeof(PaymentMethod), currentReceipt.GetPaymentMethod())}");
-            Console.WriteLine($" ---------------------- ");
+            Console.WriteLine($" -------------------------------------");
         }
 
         /// <summary>

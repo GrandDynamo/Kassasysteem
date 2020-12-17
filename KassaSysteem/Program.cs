@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using System.Linq;
 
 namespace KassaSysteem
 {
@@ -26,6 +27,8 @@ namespace KassaSysteem
             var tacobeef = new Product(6, "Taco vlees", 6.0, 1.0);
             var tacospices = new Product(7, "Taco kruiden", 1.0, 0.0);
             var creamcheese = new Product(8, "Roomkaas", 5.0, 0.0);
+
+            register.AddAllowedCard(PaymentMethod.Cash);
 
             stock.AddItem(milk);
             stock.AddItem(eggs);
@@ -59,10 +62,32 @@ namespace KassaSysteem
                             {
                                 // scan
                                 Console.WriteLine($"Scanned {id}.");
+                                var product = register.GetProduct(id);
+                                if (product != null)
+                                {
+                                    register.AddToReceipt(product);
+                                    Console.WriteLine($"Added product {product.GetProductName()} to receipt.");
+                                }
+                                else
+                                {
+                                    Console.WriteLine($"Invalid product {id}");
+                                }
                             }
                             else
                             {
                                 Console.WriteLine("invalid id");
+                            }
+                        }
+                        else if (cmd.StartsWith("pay "))
+                        {
+                            var cmdargs = cmd.Substring(4).Split(' ');
+                            if(cmdargs.Length == 2)
+                            {
+                                double paid = double.Parse(cmdargs[0]);
+                                // TODO error handling if invalid paymet method
+                                PaymentMethod method = typeof(PaymentMethod).GetEnumValues().Cast<PaymentMethod>().First(x => Enum.GetName(typeof(PaymentMethod), x).ToUpper() == cmdargs[1].ToUpper());
+
+                                Console.WriteLine($"Payment method: {Enum.GetName(typeof(PaymentMethod), method)}");
                             }
                         }
                         else
